@@ -17,7 +17,7 @@ Workflow WorkflowParser::parse(const string file_name) const {
 	getline(file, line);
 	if (line.compare("desc")) { throw invalid_argument("invalid file format"); }
 
-	InstructionFactory* Factory = InstructionFactory::getInstance();
+	InstructionFactory& Factory = InstructionFactory::getInstance();
 
 	Workflow w;
 	while (line.compare("csed")) {
@@ -37,7 +37,7 @@ Workflow WorkflowParser::parse(const string file_name) const {
 		while (ss >> line) { args.push_back(line); }
 
 		w.instruction_args[id] = args;
-		w.instruction_bind[id] = Factory->Build(instruction);
+		w.instruction_bind[id] = Factory.Build(instruction);
 	}
 
 	vector<size_t> order = vector<size_t>();
