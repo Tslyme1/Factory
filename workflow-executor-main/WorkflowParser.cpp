@@ -4,6 +4,7 @@
 
 #include "InstructionFactory.h"
 
+#include <stdexcept>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -15,7 +16,7 @@ Workflow WorkflowParser::parse(const string file_name) const {
 	string line;
 
 	getline(file, line);
-	if (line.compare("desc")) { throw invalid_argument("invalid file format"); }
+	if (line.compare("desc")) { throw invalid_argument("invalid file name"); }
 
 	InstructionFactory& Factory = InstructionFactory::getInstance();
 
@@ -37,7 +38,7 @@ Workflow WorkflowParser::parse(const string file_name) const {
 		while (ss >> line) { args.push_back(line); }
 
 		w.instruction_args[id] = args;
-		w.instruction_bind[id] = Factory.Build(instruction);
+		w.instruction_bind[id] = instruction;
 	}
 
 	vector<size_t> order = vector<size_t>();
