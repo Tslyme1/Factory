@@ -66,7 +66,7 @@ void Sort::execute(std::string& text, std::vector<std::string> args) {
     std::string line;
     while (ss >> line) {
         if (count.find(line) == count.end()) {
-            count[line] = 0;
+            count[line] = 1;
         } else {
             ++count[line];
         }
