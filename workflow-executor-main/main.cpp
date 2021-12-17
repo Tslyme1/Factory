@@ -4,12 +4,10 @@
 
 #include <iostream>
 
-using namespace std;
-
 int main() {
     
-    string file_name;
-    cin >> file_name;
+    std::string file_name;
+    std::cin >> file_name;
 
     WorkflowParser wp;
 
@@ -24,4 +22,3 @@ int main() {
 
     std::cout << "Done!\n";
 }
-
