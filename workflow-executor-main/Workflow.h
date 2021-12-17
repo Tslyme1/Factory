@@ -7,6 +7,6 @@
 
 typedef struct Workflow {
 	std::unordered_map<size_t, std::vector<std::string> > instruction_args;
-	std::unordered_map<size_t, Instruction*> instruction_bind;
+	std::unordered_map<size_t, std::string> instruction_bind;
 	std::vector<size_t> order;
 } Workflow;
