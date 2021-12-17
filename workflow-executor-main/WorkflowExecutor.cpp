@@ -7,7 +7,8 @@
 #include <functional>
 
 void WorkflowExecutor::run(Workflow w) const {
-	string text = "";
+	std::string text = "";
+	
 	for (size_t id : w.order) {
 		w.instruction_bind[id]->execute(text, w.instruction_args[id]);
 	}
