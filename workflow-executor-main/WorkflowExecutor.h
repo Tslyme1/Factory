@@ -1,11 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <unordered_map>
-
 #include "Workflow.h"
-
-using namespace std;
 
 class WorkflowExecutor {
 public:
@@ -14,4 +9,3 @@ public:
 
 	void run(Workflow w) const;
 };
-
