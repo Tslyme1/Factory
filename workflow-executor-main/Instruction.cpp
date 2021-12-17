@@ -25,7 +25,7 @@ void Readfile::execute(std::string& text, std::vector<std::string> args) {
     text = data;
 };
 
-void Writefile::execute(std::string& text, std::vector<std::string> args) {
+void DataWriter::execute(std::string& text, std::vector<std::string> args) {
     if (args.empty()) { throw std::length_error("Not enough arguments for Writefile"); }
     
     std::ofstream output(args[0]);
@@ -105,17 +105,3 @@ void Replace::execute(std::string& text, std::vector<std::string> args) {
         text += line + '\n';
     }
 };
-
-void Dump::execute(std::string& text, std::vector<std::string> args) {
-    if (args.empty()) { throw std::length_error("Not enough arguments for Dump"); }
-
-    std::ofstream output(args[0]);
-
-    if (!output.is_open()) {
-        throw std::invalid_argument("Cannot open file");
-    }
-
-    output << text;
-    output.close();
-};
-
