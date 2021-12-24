@@ -49,12 +49,12 @@ namespace {
 	bool registerInstructions() {
 		InstructionFactory& Factory = InstructionFactory::getInstance();
 
-		Factory.Register("readfile",  new Readfile());
-		Factory.Register("writefile", new Writefile());
-		Factory.Register("grep",      new Grep());
-		Factory.Register("sort",      new Sort());
-		Factory.Register("replace",   new Replace());
-		Factory.Register("dump",      new Dump());
+		Factory.Register<Readfile>("readfile");
+		Factory.Register<Writefile>("writefile");
+		Factory.Register<Grep>("grep");
+		Factory.Register<Sort>("sort");
+		Factory.Register<Replace>("replace");
+		Factory.Register<Dump>("dump");
 
 		return true;
 	}
