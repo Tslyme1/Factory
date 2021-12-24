@@ -2,18 +2,22 @@
 #include <string>
 #include <map>
 #include <stdexcept>
+#include <functional>
 
 class Instruction;
 
 class InstructionFactory {
 public:
+	typedef std::function<Instruction*()> Builder;
+
 	static InstructionFactory& getInstance() {
 		static InstructionFactory _instance;
 		return _instance;
 	}
 
-	bool Register(std::string const& key, Instruction* instruction) {
-		return this->_map.insert(std::make_pair(key, instruction)).second;
+	template<typename Mutation>
+	bool Register(std::string const& key) {
+		return this->_map.insert(std::make_pair(key, [](){ return new Mutation(); })).second;
 	}
 	
 	Instruction* Build(std::string const& key) const {
@@ -21,13 +25,13 @@ public:
 		if (it == _map.end()) { 
 			throw std::invalid_argument("no Instruction at key `" + key + '`'); 
 		}
-		return it->second;
+		return it->second();
 	}
 private:
 	InstructionFactory() = default;
 
 	static InstructionFactory _instance;
-	std::map<std::string, Instruction*> _map;
+	std::map<std::string, Builder> _map;
 public:
 	InstructionFactory(InstructionFactory const&) = delete;
 	void operator=(InstructionFactory const&) = delete;
